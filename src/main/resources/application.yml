@@ -1,0 +1,6 @@
+spring:
+  datasource.driver-class-name: com.vertica.jdbc.Driver
+  datasource.url: jdbc:vertica://${embedded.vertica.host}:${embedded.vertica.port}/${embedded.vertica.database}
+  datasource.username: ${embedded.vertica.user}
+  datasource.password: ${embedded.vertica.password}
+

@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  vertica:
+    platform: linux/amd64
+    environment:
+      VERTICA_DB_USER: "dbadmin"
+      VERTICA_DB_PASSWORD: ""
+      VERTICA_DB_NAME: "test"
+      VERTICA_MEMDEBUG: 2
+      TZ: "Asia/Seoul"
+    image: vertica/vertica-ce:10.1.1-0
+    ports:
+      - "5433"
+      - "5444"

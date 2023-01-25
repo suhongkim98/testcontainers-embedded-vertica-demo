@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
 @Slf4j
 public class VerticaContainerUtils
 {
-    public VerticaContainerUtils()
+    private VerticaContainerUtils()
     {
     }
 

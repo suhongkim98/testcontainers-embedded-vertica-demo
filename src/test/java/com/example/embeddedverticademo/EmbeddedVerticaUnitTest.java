@@ -1,6 +1,7 @@
 package com.example.embeddedverticademo;
 
 import com.example.embeddedverticademo.configuration.EmbeddedVerticaProperties;
+import com.example.embeddedverticademo.support.TestContainersUnitSupport;
 import com.vertica.jdbc.DataSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @SpringBootTest 없이 테스트컨테이너 활용해 단위테스트 예제
  */
-public class EmbeddedVerticaUnitTest extends TestContainersIntegrationSupport
+public class EmbeddedVerticaUnitTest extends TestContainersUnitSupport
 {
     private JdbcTemplate jdbcTemplate;
 

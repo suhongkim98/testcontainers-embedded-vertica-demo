@@ -11,8 +11,10 @@ import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.utility.DockerImageName;
 import org.testcontainers.utility.MountableFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 @Slf4j
@@ -41,14 +43,35 @@ public class VerticaContainerUtils
         ContainerState container,
         EmbeddedVerticaProperties properties) throws IOException, InterruptedException
     {
-        container.copyFileToContainer(MountableFile.forClasspathResource("vertica/init.sql"), "/init.sql");
+        MountableFile resources = MountableFile.forClasspathResource("vertica/init-scripts");
+        container.copyFileToContainer(resources, "/vertica/init-scripts");
 
+        File dir = new File(resources.getResolvedPath());
+        String[] files = dir.list();
+        Arrays.sort(files);
+
+        for (String file : files)
+        {
+            execSqlInContainer(
+                container,
+                properties.getDatabase(),
+                properties.getUser(),
+                "/vertica/init-scripts/" + file);
+        }
+    }
+
+    private static void execSqlInContainer(
+        ContainerState container,
+        String database,
+        String dbUser,
+        String file) throws IOException, InterruptedException
+    {
         Container.ExecResult execResult = container.execInContainer(
             "/opt/vertica/bin/vsql",
             "-d",
-            properties.getDatabase(),
+            database,
             "-U",
-            properties.getUser(),
+            dbUser,
             "-w",
             "password",
             "-h",
@@ -56,7 +79,7 @@ public class VerticaContainerUtils
             "--variable",
             "dpt=101",
             "-f",
-            "/init.sql");
+            file);
 
         log.info(execResult.getStdout());
     }
@@ -96,5 +119,4 @@ public class VerticaContainerUtils
 
         log.info("Started Vertica server. Connection details: {}, ", map);
     }
-
 }

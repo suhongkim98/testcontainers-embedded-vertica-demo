@@ -13,7 +13,8 @@ public class EmbeddedVerticaProperties
     String user = "dbadmin";
     String password = "";
 
-    public String getDefaultDockerImage() {
+    public String getDefaultDockerImage()
+    {
         return "vertica/vertica-ce:10.1.1-0";
     }
 }

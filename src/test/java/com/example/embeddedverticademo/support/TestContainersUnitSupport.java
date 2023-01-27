@@ -1,4 +1,4 @@
-package com.example.embeddedverticademo;
+package com.example.embeddedverticademo.support;
 
 import com.example.embeddedverticademo.configuration.EmbeddedVerticaProperties;
 import com.example.embeddedverticademo.utils.DockerComposeUtils;
@@ -9,7 +9,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
-public class TestContainersIntegrationSupport
+public class TestContainersUnitSupport
 {
     @Container
     protected static final DockerComposeContainer composeContainer;

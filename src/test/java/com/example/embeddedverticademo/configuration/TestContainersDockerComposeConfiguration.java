@@ -4,8 +4,8 @@ import com.example.embeddedverticademo.utils.DockerComposeUtils;
 import com.example.embeddedverticademo.utils.VerticaContainerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.testcontainers.containers.ContainerState;
 import org.testcontainers.containers.DockerComposeContainer;
@@ -16,7 +16,7 @@ import org.testcontainers.containers.DockerComposeContainer;
  * Generic Container를 직접 생성하는 방식과 도커컴포즈 방식 중 하나만 사용하세요
  */
 @Slf4j
-@Configuration
+@TestConfiguration
 @EnableConfigurationProperties(EmbeddedVerticaProperties.class)
 public class TestContainersDockerComposeConfiguration
 {

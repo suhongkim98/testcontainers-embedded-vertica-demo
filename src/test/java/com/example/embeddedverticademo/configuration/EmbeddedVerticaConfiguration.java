@@ -3,12 +3,10 @@ package com.example.embeddedverticademo.configuration;
 import com.example.embeddedverticademo.utils.VerticaContainerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.testcontainers.containers.GenericContainer;
-
-import java.io.IOException;
 
 
 /**
@@ -16,7 +14,7 @@ import java.io.IOException;
  * Docker Compose 방식과 이 방식 중 하나만 사용하세요
  */
 @Slf4j
-@Configuration
+@TestConfiguration
 @EnableConfigurationProperties(EmbeddedVerticaProperties.class)
 public class EmbeddedVerticaConfiguration
 {
@@ -28,16 +26,16 @@ public class EmbeddedVerticaConfiguration
      * @param properties
      * @return
      */
-//    @Bean(name = "embeddedVertica", destroyMethod = "stop")
-//    public GenericContainer<?> embeddedVertica(
-//        ConfigurableEnvironment environment,
-//        EmbeddedVerticaProperties properties) throws Throwable
-//    {
-//        GenericContainer<?> verticaContainer = VerticaContainerUtils.createVerticaContainer(properties);
-//        verticaContainer.start();
-//
-//        // init vertica
-//        VerticaContainerUtils.initializeVerticaContainer(verticaContainer, properties, environment);
-//        return verticaContainer;
-//    }
+    @Bean(name = "embeddedVertica", destroyMethod = "stop")
+    public GenericContainer<?> embeddedVertica(
+        ConfigurableEnvironment environment,
+        EmbeddedVerticaProperties properties) throws Throwable
+    {
+        GenericContainer<?> verticaContainer = VerticaContainerUtils.createVerticaContainer(properties);
+        verticaContainer.start();
+
+        // init vertica
+        VerticaContainerUtils.initializeVerticaContainer(verticaContainer, properties, environment);
+        return verticaContainer;
+    }
 }

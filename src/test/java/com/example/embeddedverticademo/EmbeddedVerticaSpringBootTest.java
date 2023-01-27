@@ -1,9 +1,9 @@
 package com.example.embeddedverticademo;
 
+import com.example.embeddedverticademo.support.TestContainersIntegrationSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -12,8 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * 버티카 테스트컨테이너를 빈으로 등록하여 @SpringBootTest를 통해 테스트코드에서 확인하는 예제
  */
-@SpringBootTest
-public class EmbeddedVerticaSpringBootTest
+public class EmbeddedVerticaSpringBootTest extends TestContainersIntegrationSupport
 {
     @Autowired
     JdbcTemplate jdbcTemplate;
